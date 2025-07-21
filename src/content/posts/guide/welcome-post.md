@@ -8,6 +8,7 @@ category: '站务'
 draft: false 
 lang: 'zh_CN'
 series: ''
+pinned: true
 ---
 
 > 封面 Aritist: [夜里一抹紫](https://yeliyimozi.lofter.com/)

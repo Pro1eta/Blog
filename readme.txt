@@ -1,1 +1,1 @@
-base
+安装依赖：@iconify-json/mdi，@iconify/vue
