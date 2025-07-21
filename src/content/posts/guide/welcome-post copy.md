@@ -2,11 +2,12 @@
 title: 站点指引
 published: 2025-07-21
 description: '欢迎来到本站👋'
-image: './cover/weilcome-post-cover.jpg'
+image: './covers/weilcome-post-cover.jpg'
 tags: ["Blogging"]
 category: '站务'
 draft: false 
 lang: 'zh_CN'
+series: ''
 ---
 
 > 封面 Aritist: [夜里一抹紫](https://yeliyimozi.lofter.com/)
@@ -33,3 +34,5 @@ lang: 'zh_CN'
 如果没有特殊说明，本站点所有内容都默认遵循 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议，文中有具体说明的，以其说明为准。
 
 >  ***Have a nice day & Have yourself.***
+>
+>

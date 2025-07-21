@@ -4,48 +4,84 @@ import { i18n } from "../../i18n/translation";
 import { getPostSeries } from "../../utils/content-utils";
 import { getPostUrlBySlug } from "../../utils/url-utils";
 import WidgetLayout from "./WidgetLayout.astro";
+import dayjs from "dayjs";
 
+import { type BlogPostData } from "../../types/config";
 const COLLAPSED_HEIGHT = "7.5rem";
 
 interface Props {
 	class?: string;
 	style?: string;
 	series: string;
+    currentPostTitle?: string;
 }
 const className = Astro.props.class;
 const style = Astro.props.style;
 const seriesName = Astro.props.series;
+const currentPostTitle = Astro.props.currentPostTitle;
 
 const series = await getPostSeries(seriesName);
 
 const isCollapsed = series.length >= 10;
+// 分组函数
+function groupByMonth(
+  posts: { body: string; data: BlogPostData; slug: string }[],
+) {
+  const groups: {
+    [key: string]: { body: string; data: BlogPostData; slug: string }[];
+  } = {};
+  for (const post of posts) {
+    // 假设 post.data.date 是 ISO 字符串
+    const date = dayjs(post.data.published);
+    const key = `${date.year()}-${date.month() + 1}`; // month() 从0开始
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(post);
+  }
+  return groups;
+}
+const grouped = groupByMonth(series);
+// 生成分组后的数组，方便遍历
+const groupedArr = Object.entries(grouped).sort((a, b) =>
+  b[0].localeCompare(a[0]),
+);
 ---
 <WidgetLayout name={i18n(I18nKey.series) + " - " + series[0].data.series} id="series" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
     <div class="flex flex-col gap-1">
-        {series.map(t => (
-            <a href={getPostUrlBySlug(t.slug)}
-                aria-label={t.data.title}
-                class="group btn-plain h-10 w-full rounded-lg hover:text-[initial]"
-            >
-                <!-- dot and line -->
-                <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
-                    <div class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
-                    bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
-                    outline outline-4 z-50
-                    outline-[var(--card-bg)]
-                    group-hover:outline-[var(--btn-plain-bg-hover)]
-                    group-active:outline-[var(--btn-plain-bg-active)]
-                    "
-                    ></div>
-                </div>
-                <!-- post title -->
-                <div class="w-[85%] text-left font-bold
-                    group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                    text-75 pr-15 whitespace-nowrap overflow-ellipsis overflow-hidden" title={t.data.title}
-                >
-                        {t.data.title}
-                </div>
-            </a>
+        {groupedArr.map(([month, posts]) => (
+            <>
+                <div class="text-xs text-gray-400 font-semibold my-2">{month}</div>
+                {posts.map(t => (
+                    <a href={getPostUrlBySlug(t.slug)}
+                        aria-label={t.data.title}
+                        class="group btn-plain h-10 w-full rounded-lg hover:text-[initial] relative"
+                    >
+                        <!-- dot and line -->
+                        <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
+                            <div class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
+                                bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
+                                outline outline-4 z-50
+                                outline-[var(--card-bg)]
+                                group-hover:outline-[var(--btn-plain-bg-hover)]
+                                group-active:outline-[var(--btn-plain-bg-active)]"
+                            ></div>
+                        </div>
+                        <!-- post title -->
+                        <div class="w-[85%] text-left font-bold
+                            group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
+                            text-75 pr-15 whitespace-nowrap overflow-ellipsis overflow-hidden" title={t.data.title}
+                        >
+                            {t.data.title}
+                        </div>
+                        {t.data.title == currentPostTitle && (
+                            <span class="absolute top-1/2 right-2 transform -translate-y-1/2 text-[var(--primary)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </span>
+                        )}
+                    </a>
+                ))}
+            </>
         ))}
     </div>
 </WidgetLayout>
