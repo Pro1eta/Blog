@@ -74,7 +74,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "RSS",
 			icon: "fa6-solid:square-rss",
-			url: "https://proleta.cn/rss.xml",
+			url: "https://proleta.org/rss.xml",
 		},
 	],
 };
