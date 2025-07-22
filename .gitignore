@@ -29,4 +29,3 @@ yarn.lock
 # posts
 /src/content/posts/
 /src/content/posts-copy/
-/src/content/spec/
