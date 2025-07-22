@@ -22,6 +22,9 @@ pinned: true
 - **随笔** Essays：随想、生活、阅读、小说等内容。
 - **站务** Website：对该站点进行搭建、部署、修改以及说明的文章。
 
+## 评论
+集成了 giscus，**关于**界面同时也是留言板。
+
 ## 系列
 
 **系列**是“分类”的子类，用来联系内容相关性强，比较成体系的文章。
@@ -35,5 +38,4 @@ pinned: true
 如果没有特殊说明，本站点所有内容都默认遵循 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议，文中有具体说明的，以其说明为准。
 
 >  ***Have a nice day & Have yourself.***
->
 >
