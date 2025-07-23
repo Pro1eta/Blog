@@ -37,5 +37,8 @@ pinned: true
 
 如果没有特殊说明，本站点所有内容都默认遵循 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 协议，文中有具体说明的，以其说明为准。
 
->  ***Have a nice day & Have yourself.***
+>***That's it.***
 >
+>
+>
+>***Have a nice day & Have yourself.***
