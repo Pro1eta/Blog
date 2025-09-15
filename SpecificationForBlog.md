@@ -70,7 +70,78 @@ ssh myblog
 
 posts 等非常具体的内容已经被我添加至 `.gitignore`，所以主要是 Blog 的管理问题。
 
-## 同步 fuwari 的最新上游
+## 同步 fuwari 的最新上游（main）
 
 一般来说，在本地的分支为 `diy`。`main` 被托管在 github 作为备份。
+
+当上游有更新的时候，首先拉取至 `main`
+
+1. 添加上游远程仓库
+
+```bash
+git remote add upstream https://github.com/saicaca/fuwari.git
+```
+
+检查当前远程仓库
+
+```bash
+git remote -v
+```
+
+2. 从上游拉取最新更改
+
+切换至 `main` 分支
+
+```bash
+git checkout main
+```
+
+获取上游最新更改，这会下载 `upstream` 仓库的所有分支与提交，不会自动合并到本地分支，**是安全的**。
+
+3. 使用 merge 进行合并更改
+
+```bash
+git merge upstream/main
+```
+
+这个时候在 `vs code` 处理所有的合并更加方便，当然，也可以在其它地方手动修改代码，解决完所有冲突之后
+
+``` bash
+git add <conflicted_file_name>
+```
+
+接下来进行合并提交
+
+```bash
+git commit
+```
+
+3. push 到远程仓库
+
+```bash
+git push origin main
+```
+
+## 同步到diy
+
+回到本地 diy 文件，现在将 diy 的最新分支和 main 的最新分支进行合并即可。
+
+切换到 `diy` 分支
+
+```bash
+git checkout diy
+```
+
+合并，然后解决冲突
+
+```bash
+git merge main
+```
+
+提交，然后 push
+
+```bash
+git commit
+git push origin diy
+```
 
