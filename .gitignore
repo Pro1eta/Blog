@@ -26,6 +26,9 @@ package-lock.json
 bun.lockb
 yarn.lock
 
+# ide
+.idea
+*.iml
+
 # posts
 /src/content/posts/
-/src/content/posts-copy/
