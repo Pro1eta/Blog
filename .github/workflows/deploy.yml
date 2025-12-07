@@ -32,11 +32,11 @@ jobs:
       - name: Deploy with rsync # 步骤3: 使用 rsync 部署到服务器
         uses: easingthemes/ssh-deploy@v4.1.10
         with:
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # 获取私钥
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}         # 获取公钥指纹
-          host: ${{ secrets.SERVER_HOST }}                # 获取IP/域名
-          username: ${{ secrets.SERVER_USERNAME }}         # 获取部署用户名
-          port: ${{ secrets.SERVER_PORT }}                 # 获取 SSH 端口
-          source: "dist/"
-          target: "/apps/proletablog"
-          args: "-avz --delete" # rsync 参数：archive, verbose, compress, 删除目标中不存在于源的文件
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # 获取私钥
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}         # 获取公钥指纹
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}                # 获取IP/域名
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}         # 获取部署用户名
+          REMOTE_PORT: ${{ secrets.SERVER_PORT }}                 # 获取 SSH 端口
+          SOURCE: "dist/"
+          TARGET: "/apps/proletablog"
+          ARGS: "-avz --delete" # rsync 参数：archive, verbose, compress, 删除目标中不存在于源的文件

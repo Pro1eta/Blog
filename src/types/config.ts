@@ -96,7 +96,7 @@ export type BlogPostData = {
 	category?: string;
 	prevTitle?: string;
 	prevSlug?: string;
-	pinned?:boolean;
+	pinned?: boolean;
 	nextTitle?: string;
 	nextSlug?: string;
 };

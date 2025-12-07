@@ -13,7 +13,7 @@ interface Props {
 	class?: string;
 	style?: string;
 	series: string;
-    currentPostTitle?: string;
+	currentPostTitle?: string;
 }
 const className = Astro.props.class;
 const style = Astro.props.style;
@@ -25,24 +25,24 @@ const series = await getPostSeries(seriesName);
 const isCollapsed = series.length >= 10;
 // 分组函数
 function groupByMonth(
-  posts: { body: string; data: BlogPostData; slug: string }[],
+	posts: { body: string; data: BlogPostData; slug: string }[],
 ) {
-  const groups: {
-    [key: string]: { body: string; data: BlogPostData; slug: string }[];
-  } = {};
-  for (const post of posts) {
-    // 假设 post.data.date 是 ISO 字符串
-    const date = dayjs(post.data.published);
-    const key = `${date.year()}-${date.month() + 1}`; // month() 从0开始
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(post);
-  }
-  return groups;
+	const groups: {
+		[key: string]: { body: string; data: BlogPostData; slug: string }[];
+	} = {};
+	for (const post of posts) {
+		// 假设 post.data.date 是 ISO 字符串
+		const date = dayjs(post.data.published);
+		const key = `${date.year()}-${date.month() + 1}`; // month() 从0开始
+		if (!groups[key]) groups[key] = [];
+		groups[key].push(post);
+	}
+	return groups;
 }
 const grouped = groupByMonth(series);
 // 生成分组后的数组，方便遍历
 const groupedArr = Object.entries(grouped).sort((a, b) =>
-  b[0].localeCompare(a[0]),
+	b[0].localeCompare(a[0]),
 );
 ---
 <WidgetLayout
