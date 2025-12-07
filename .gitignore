@@ -34,5 +34,6 @@ yarn.lock
 /src/content/.obsidian
 /src/content/.trash
 /src/content/posts-copy
-/src/content/assets/
-/src/content/templates/
+# 如果使用图床的话，存放图片的文件也不必上传
+/src/content/posts/assets
+/src/content/templates

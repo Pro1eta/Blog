@@ -50,11 +50,11 @@ pnpm dev
 
 ## \*使用 SSH 连接服务器
 
-如果你对服务器的操作比较熟悉了，可以跳过这一小节。
+**如果你对服务器的操作比较熟悉了，可以跳过这一小节。**
 
 首先确保已经购买了云服务器，我在这里不做任何服务商的推荐。打开服务器的 VNC：
 
-![](./assets/manage-blogs-1/2025-12-manage-blogs-1-0b2c64e1.webp)
+![2025 12 manage blogs 1 0b2c64e1](https://image.proleta.org/2025/12/2025-12-manage-blogs-1-0b2c64e1.webp)
 
 例如公网 IP 是 `111.22.33.444` ，连接一下：
 
@@ -202,7 +202,7 @@ server {
 
 有几个地方需要特别说一下：第一， `root` 不支持相对路径，需要换成绝对路径；第二是如果你自己设计了404页面，可以按上面这样配置成你自己的；第三点，需要在 DNS 服务器的提供商中添加 A 记录，否则只能通过公网 IP 访问你的网页。
 
-![](./assets/manage-blogs-1/2025-12-manage-blogs-1-a3523263.webp)
+![2025 12 manage blogs 1 a3523263](https://image.proleta.org/2025/12/2025-12-manage-blogs-1-a3523263.webp)
 
 例如在图中，这些域名和子域名都解析到了我的服务器：`proleta.org` , `www.proleta.org`, `wiki.proleta.org`。
 

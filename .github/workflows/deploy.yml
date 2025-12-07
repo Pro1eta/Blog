@@ -1,0 +1,39 @@
+name: Deploy Astro Blog # 工作流的名称，已更新为 Astro
+
+# 新的 push 到 'main' 分支时触发此工作流。
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 在 Ubuntu 虚拟机上运行此作业
+
+    steps:
+      - name: Checkout code # 步骤1: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: pnpm install 
+
+
+      - name: Build Astro site # 步骤2: 构建静态网站
+        run: pnpm build 
+
+      - name: Deploy with rsync # 步骤3: 使用 rsync 部署到服务器
+        uses: easingthemes/ssh-deploy@v4.1.10
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # 获取私钥
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}         # 获取公钥指纹
+          host: ${{ secrets.SERVER_HOST }}                # 获取IP/域名
+          username: ${{ secrets.SERVER_USERNAME }}         # 获取部署用户名
+          port: ${{ secrets.SERVER_PORT }}                 # 获取 SSH 端口
+          source: "dist/"
+          target: "/apps/proletablog"
+          args: "-avz --delete" # rsync 参数：archive, verbose, compress, 删除目标中不存在于源的文件

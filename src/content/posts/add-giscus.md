@@ -17,7 +17,7 @@ series: 博客改造
 
 在 [Giscus App](https://github.com/apps/giscus) 为你的 github 安装 giscus。安装时可以选择对所有仓库，也可以先看后文，创建专用于 giscus 的仓库。
 
-![b118bea373e6c2613639327f2aa2d07c](https://image.proleta.org/2025/12/b118bea373e6c2613639327f2aa2d07c.webp)
+![2025 12 add giscus 5760864b](https://image.proleta.org/2025/12/2025-12-add-giscus-5760864b.webp)
 
 ## 配置 giscus
 
@@ -33,7 +33,7 @@ series: 博客改造
 
 - Discussion 分类：建议选择其推荐的 Annoucements。
 
-![e2496e3f2dffa811a6e266d71168daac](https://image.proleta.org/2025/12/e2496e3f2dffa811a6e266d71168daac.webp)
+![e2496e3f2dffa811a6e266d71168daac|621x942](https://image.proleta.org/2025/12/e2496e3f2dffa811a6e266d71168daac.webp)
 
 - 特性：按照需求选。
 - 主题：按照需求选。
