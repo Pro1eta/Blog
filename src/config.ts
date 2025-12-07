@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 	lang: "zh_CN", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
 	themeColor: {
 		hue: 285, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
-		fixed: true, // Hide the theme color picker for visitors
+		fixed: false, // Hide the theme color picker for visitors
 	},
 	banner: {
 		enable: true,
@@ -46,6 +46,11 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Series,
 		LinkPreset.About,
 		LinkPreset.Friends,
+		{
+			name: "Wiki",
+			url: "https://wiki.proleta.org/", // Internal links should not include the base path, as it is automatically added
+			external: true, // Show an external link icon and will open in a new tab
+		},
 		{
 			name: "Travelling",
 			url: "https://www.travellings.cn/go.html", // Internal links should not include the base path, as it is automatically added

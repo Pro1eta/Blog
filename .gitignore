@@ -31,4 +31,8 @@ yarn.lock
 *.iml
 
 # posts
-/src/content/posts/
+/src/content/.obsidian
+/src/content/.trash
+/src/content/posts-copy
+/src/content/assets/
+/src/content/templates/
