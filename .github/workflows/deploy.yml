@@ -27,7 +27,7 @@ jobs:
 
 
       - name: Build Astro site # 步骤2: 构建静态网站
-        run: pnpm run build
+        run: pnpm build
 
       - name: Deploy with rsync # 步骤3: 使用 rsync 部署到服务器
         uses: easingthemes/ssh-deploy@v4.1.10
