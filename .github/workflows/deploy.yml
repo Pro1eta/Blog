@@ -37,5 +37,5 @@ jobs:
           REMOTE_USER: ${{ secrets.SERVER_USERNAME }}         # 获取部署用户名
           REMOTE_PORT: ${{ secrets.SERVER_PORT }}                 # 获取 SSH 端口
           SOURCE: "dist/"
-          TARGET: "/apps/proletablog"
+          TARGET: "/apps/proletablog/dist"
           ARGS: "-avz --delete" # rsync 参数：archive, verbose, compress, 删除目标中不存在于源的文件
