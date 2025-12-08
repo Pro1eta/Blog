@@ -1,12 +1,12 @@
 ---
+import dayjs from "dayjs";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
+import { type BlogPostData } from "../../types/config";
 import { getPostSeries } from "../../utils/content-utils";
 import { getPostUrlBySlug } from "../../utils/url-utils";
 import WidgetLayout from "./WidgetLayout.astro";
-import dayjs from "dayjs";
 
-import { type BlogPostData } from "../../types/config";
 const COLLAPSED_HEIGHT = "7.5rem";
 
 interface Props {

@@ -3,8 +3,7 @@ import { UNCATEGORIZED } from "@constants/constants";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getSortedPosts } from "../utils/content-utils";
-import { getPostUrlBySlug } from "../utils/url-utils";
-import { getCategoryUrl } from "../utils/url-utils";
+import { getCategoryUrl, getPostUrlBySlug } from "../utils/url-utils";
 
 interface Props {
 	keyword?: string;
@@ -28,7 +27,7 @@ const groups: { category: string; series: Series[] }[] = (() => {
 		) => {
 			const category = post.data.category || UNCATEGORIZED;
 			const series = post.data.series || UNCATEGORIZED;
-			if (category == UNCATEGORIZED || series === UNCATEGORIZED) {
+			if (category === UNCATEGORIZED || series === UNCATEGORIZED) {
 				return grouped;
 			}
 			if (!grouped[category]) {

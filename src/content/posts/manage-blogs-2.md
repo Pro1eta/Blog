@@ -71,6 +71,28 @@ git push origin main
 - [Clear Unuserd Images](https://github.com/ozntel/oz-clear-unused-images-obsidian)：清除没有使用的图片。
 - [Codeblocks Customizer](https://github.com/mugiwara85/CodeblockCustomizer)：为 obsidian 的代码块添加行号等。
 
+为了避免 biome 令人抓狂的检查，请修改 `biome.json` 来忽略对应的文件。
+
+```json ins = {10-15}
+<!-- biome.json --> 
+"files": {
+	"ignoreUnknown": false,
+	"includes": [
+		"**",
+		"!**/src/**/*.css",
+		"!**/src/public/**/*",
+		"!**/dist/**/*",
+		"!**/node_modules/**/*",
+		"!src/utils/tempCodeRunnerFile.ts",
+		"!src/content/.obsidian/**",
+		"!src/content/.trash/**",
+		"!src/content/posts-copy/**",
+		"!src/content/posts/assets/**",
+		"!src/content/templates/**"
+	]
+},
+```
+
 # GitHub Actions 自动化部署（CI/CD）
 
 ## 服务器准备

@@ -12,9 +12,15 @@
 			"!**/src/**/*.css",
 			"!**/src/public/**/*",
 			"!**/dist/**/*",
-			"!**/node_modules/**/*"
+			"!**/node_modules/**/*", 
+     		"!src/utils/tempCodeRunnerFile.ts",  
+     	 	"!src/content/.obsidian/**",           
+      		"!src/content/.trash/**",             
+			"!src/content/posts-copy/**",      
+      		"!src/content/posts/assets/**",      
+      		"!src/content/templates/**"           
 		]
-	},
+	},	
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab"
