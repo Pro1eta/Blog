@@ -209,9 +209,7 @@ ssh-keyscan -H 111.22.33.444 | grep -v '^#'
 
 一般来说，客户端（例如 GitHub Actions）持有私钥，服务端持有公钥，我们可以认为攻击者也持有公钥。
 
-服务端认证客户端的身份是容易的。服务端向客户端发送一条 chanllenge（就是一条随机消息），客户端使用私钥加密后，将密文和公钥一起发送回服务端。服务端干两件事，首先查询自己是否存储了这一公钥，然后利用存储的公钥对密文解密。服务端比对解密后的明文，如果与发布的 chanllenge 一致，说明客户端持有正确私钥，完成了对客户端的身份认证。
-
-客户端认证服务端的身份，则存在**中间人攻击**的风险。客户端验证服务端身份的手段只有公钥和私钥，而攻击者和服务端都持有公钥。确认身份后，客户端与攻击者进行密钥协商，后者因此获得了信息和数据。
+服务端认证客户端的身份是容易的，而客户端认证服务端的身份存在**中间人攻击**的风险。客户端验证服务端身份的手段只有公钥和私钥，而攻击者和服务端都持有公钥。确认身份后，客户端与攻击者进行密钥协商，攻击者可以获得了信息和数据。
 
 客户端拥有 known hosts 之后，首先接收来自服务端的公钥。我们认为攻击者几乎不可能和**信任的机器**建立过连接。如果服务端提供的公钥和 known hosts 不匹配，说明服务端没有和**信任的机器**建立过连接，认为服务端身份已经改变。这样就一定程度上避免了中间人攻击。
 
@@ -229,12 +227,11 @@ mkdir -p .github/workflows
 touch .github/workflows/deploy.yml
 ```
 
-实际上就是将构建静态网页的指令重新写一遍，根据所选框架的不同可以自行修改。
+实际上就是将构建静态网页的指令重新写一遍，根据所选框架的不同可以自行修改。以下是我的配置：
 
-```yaml
-name: Deploy Blog # 工作流的名称，已更新为 Astro
+```yml
 
-# 新的 push 到 'main' 分支时触发此工作流。
+
 on:
   push:
     branches:
@@ -242,41 +239,44 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # 在 Ubuntu 虚拟机上运行此作业
+  # 在 Ubuntu 虚拟机上运行此作业
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code # 步骤1: 检出仓库代码
+    # 步骤1: 检出仓库代码
+      - name: Checkout code 
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '23'
-
+          node-version: '22'
+      - name: Install pnpm CLI 
+        run: npm install -g pnpm
+        
       - name: Install dependencies
-        run: pnpm install 
-
-      - name: Build Astro site # 步骤2: 构建静态网站
-        run: pnpm build 
-
-      - name: Deploy with rsync # 步骤3: 使用 rsync 部署到服务器
+        run: pnpm install
+         # 步骤2: 构建静态网站
+      - name: Build Astro site
+        run: pnpm run build
+        # 步骤3: 使用 rsync 部署到服务器
+      - name: Deploy with rsync 
         uses: easingthemes/ssh-deploy@v4.1.10
         with:
-        # 获取私钥
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-		# 服务器公钥指纹
-          known_hosts: ${{ secrets.KNOWN_HOSTS }} 
-        # 获取IP/域名     
-          host: ${{ secrets.SERVER_HOST }}  
-        # 获取部署用户名                
-          username: ${{ secrets.SERVER_USERNAME }} 
-        # 获取 SSH 端口         
-          port: ${{ secrets.SERVER_PORT }}                 
-          source: "dist/"
-          target: "/websites/myblog"
-		# rsync 参数：archive, verbose, compress, 删除目标中不存在于源的文件
-          args: "-avz --delete" 
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # 获取私钥
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}  # 获取公钥指纹
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}  # 获取IP/域名
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }} # 获取部署用户名
+          REMOTE_PORT: ${{ secrets.SERVER_PORT }} # 获取 SSH 端口
+          SOURCE: "dist/"
+          TARGET: "/apps/proletablog/dist"
+          ARGS: "-avz --delete" 
+          #archive, verbose, compress, 删除目标中不存在于源的文件
 ```
+
+>[!TIP]
+> 推送前请先在本地运行 `pnpm biome check ./src` 并对代码进行修改。Github Actions 构建失败多半是因为这个原因
+> 
+> 最好不要在 Github Actions 上 debug，效率很低，让你的提交乱七八糟而且**很让人抓狂**。
 
 添加提交并推送即可。
 
