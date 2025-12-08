@@ -12,8 +12,11 @@ Hello👋，欢迎来到我的站点。
 
 ::github{repo="Pro1eta/Blog"}
 
-本站基于 [Fuwari](https://github.com/saicaca/fuwari) 以及 [Astro](https://github.com/withastro/astro) 搭建，目前的可用域名是：
+本站基于 [Fuwari](https://github.com/saicaca/fuwari) 以及 [Astro](https://github.com/withastro/astro) 搭建，目前的可用域名有：
+
 - www.proleta.org
+- proleta.org
+- wiki.proleta.org
 
 该页面同时也是**留言板**，欢迎在下方评论区留言。
 

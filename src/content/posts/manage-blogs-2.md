@@ -1,6 +1,6 @@
 ---
 title: 【2.项目管理和自动化】如何部署并管理你的博客项目？
-published: 2025-12-07
+published: 2025-12-08
 description: 利用 git 管理你的项目并自动化部署到服务器
 image: ""
 tags:
@@ -213,7 +213,7 @@ ssh-keyscan -H 111.22.33.444 | grep -v '^#'
 
 客户端拥有 known hosts 之后，首先接收来自服务端的公钥。我们认为攻击者几乎不可能和**信任的机器**建立过连接。如果服务端提供的公钥和 known hosts 不匹配，说明服务端没有和**信任的机器**建立过连接，认为服务端身份已经改变。这样就一定程度上避免了中间人攻击。
 
->[!WARNING]
+>[!warning]
 > 如果你的域名被服务商**代理**，SERVER_HOST 的值只能是**公网 IP**，或者将代理状态配置为`仅 DNS`。
 > 
 > 当流量经过代理时，SSH客户端实际上会尝试连接到代理服务（例如Cloudflare）的IP地址，而不是服务器的真实IP地址。由于代理服务并没有配置来监听或转发SSH端口的流量到源服务器，**SSH连接会失败**。
@@ -268,13 +268,13 @@ jobs:
           REMOTE_USER: ${{ secrets.SERVER_USERNAME }} # 获取部署用户名
           REMOTE_PORT: ${{ secrets.SERVER_PORT }} # 获取 SSH 端口
           SOURCE: "dist/"
-          TARGET: "/apps/proletablog/dist"
+          TARGET: "/websites/myblog"
           ARGS: "-avz --delete" 
           #archive, verbose, compress, 删除目标中不存在于源的文件
 ```
 
 >[!TIP]
-> 推送前请先在本地运行 `pnpm biome check ./src` 并对代码进行修改。Github Actions 构建失败多半是因为这个原因
+> 推送前请先在本地运行 `pnpm biome check ./src` 并对代码进行修改。Github Actions 构建失败多半是因为这个原因。
 > 
 > 最好不要在 Github Actions 上 debug，效率很低，让你的提交乱七八糟而且**很让人抓狂**。
 
@@ -288,5 +288,5 @@ git push origin main # 或你的主分支名
 
 > 以上。
 > 
-> 重新访问网站应该就能看到了。
+> 如果要进一步避免直接使用公网IP。也可采用 Zero Trust Tunnel，不过这时候不再推荐使用 SSH。也就是说只是实现了自动化传输静态文件...有点多此一举的感觉，就不介绍了。
 
