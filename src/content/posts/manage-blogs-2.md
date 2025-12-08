@@ -194,7 +194,7 @@ GitHub Secrets 用键替换掉一些敏感信息。打开项目所在仓库，�
 - SSH_PRIVATE_KEY - 复制私钥文件 `blog-deploy-key.pub` 的全部内容，包括 `BEGIN...` 和 `END...`。
 - SERVER_HOST - **服务器公网IP**或者域名。
 - SERVER_USERNAME - 用于部署的服务器用户名，此处即 `deployuser`。
-- SERVER_PORT - SSH 端口号，可在服务商后台查看，一般为22.
+- SERVER_PORT - SSH 端口号，可在服务商后台查看，一般为22。
 - KNOWN_HOSTS - 服务器的公钥信息。
 
 **KNOWN_HOSTS** 是服务器的公钥信息。包含公钥，以及公钥通过哈希函数处理，得到的能唯一标识公钥身份的指纹。
@@ -213,10 +213,10 @@ ssh-keyscan -H 111.22.33.444 | grep -v '^#'
 
 客户端拥有 known hosts 之后，首先接收来自服务端的公钥。我们认为攻击者几乎不可能和**信任的机器**建立过连接。如果服务端提供的公钥和 known hosts 不匹配，说明服务端没有和**信任的机器**建立过连接，认为服务端身份已经改变。这样就一定程度上避免了中间人攻击。
 
->[!warning]
-> 如果你的域名被服务商**代理**，SERVER_HOST 的值只能是**公网 IP**，或者将代理状态配置为`仅 DNS`。
+>[!WARNING]
+> 如果你的域名被服务商**代理**，SERVER_HOST 的值只能是**公网 IP**，或者你需要将代理状态配置为`仅 DNS`。
 > 
-> 当流量经过代理时，SSH客户端实际上会尝试连接到代理服务（例如Cloudflare）的IP地址，而不是服务器的真实IP地址。由于代理服务并没有配置来监听或转发SSH端口的流量到源服务器，**SSH连接会失败**。
+> 当通过域名建立连接时，流量将经过代理，SSH客户端实际上会尝试连接到代理服务（例如Cloudflare）的IP地址，而不是服务器的真实IP地址。由于代理服务并没有配置来监听或转发SSH端口的流量到源服务器，**SSH连接会失败**。
 
 ## 创建 Workflow 文件并推送
 
@@ -230,8 +230,7 @@ touch .github/workflows/deploy.yml
 实际上就是将构建静态网页的指令重新写一遍，根据所选框架的不同可以自行修改。以下是我的配置：
 
 ```yml
-
-
+<!-- .github/workflows/deploy.yml --> 
 on:
   push:
     branches:
