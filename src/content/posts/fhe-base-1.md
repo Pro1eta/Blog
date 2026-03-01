@@ -8,7 +8,7 @@ tags:
   - FHE
   - Crypto
 category: 站务
-draft: true
+draft: false
 pinned: false
 lang: zh_CN
 series: 同态加密的数学基础
