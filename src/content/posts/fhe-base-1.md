@@ -1,7 +1,7 @@
 ---
-title: 【同态加密的数学基础1】近世代数基本概念
-published: 2026-02-01
-description: 理解全同态加密方案的基本知识，包含抽象代数的一些基本概念。
+title: 【同态加密的数学基础1】抽象代数基础知识
+published: 2026-03-01
+description: 群、域、环的概念，基本的群论等
 image: ""
 tags:
   - Math
@@ -12,6 +12,14 @@ pinned: false
 lang: zh_CN
 series: 同态加密的数学基础
 ---
+:::note[写在前面]
+这一系列笔记的主要目的是让人能读懂目前的全同态加密方案，并至少有一些理解。内容并不涉及特别难的数学知识。如果你接触过离散数学，你应该熟悉其中很大一部分。
+
+我通过 LLM 学习，偶尔参考一些数学教材。大部分内容都是由 LLM 识别我的手写笔记得到的，当然，我做了一些整理并优化了证明过程。
+
+限于个人水平，笔记中难免存在疏漏。如果你发现了错误，请通过[邮件](mailto:pro1etac@gmail.com)联系我，非常感谢。
+:::
+
 > **定义 1** （二元关系）
 > 
 > $S \neq \emptyset$，$S$ 上的二元关系 $R$ 是：$R \subseteq S \times S$。
@@ -122,7 +130,7 @@ $\exists 1 \in R, \forall a \in R,1 \cdot a = a \cdot 1 = a$
 > 
 > 设 $(G, \cdot)$ 是一个群，$H$ 是 $G$ 的一个子集。若 $(H, \cdot)$ 在 $G$ 的相同运算下也构成一个群，则称 $H$ 是 $G$ 的子群，记作：$H \le G$。
 
-> **定理 3** (子群判定定理)
+> **定理 3** （子群判定定理）
 > 
 > $H \le G \iff \forall a, b \in H, a \cdot b^{-1} \in H$
 
@@ -142,7 +150,7 @@ $\Leftarrow$：对 $\forall a, b \in H$ 都有 $a \cdot b^{-1} \in H$，则取 $
 群有唯一的加法单位元，子群和加法单位元和父群的加法单位元是同一个。
 :::
 
-> **定义 11 **（群同态）
+> **定义 11**（群同态）
 > 
 > 设 $(G, \cdot)$ 和 $(G', *)$ 是两个群。称映射 $f: G \to G'$ 为群同态，如果 $\forall a, b \in G, \quad f(a \cdot b) = f(a) * f(b)$。
 
@@ -152,7 +160,7 @@ $\Leftarrow$：对 $\forall a, b \in H$ 都有 $a \cdot b^{-1} \in H$，则取 $
 像：$\text{Im} f \triangleq \{ f(g) \mid g \in G \}$
 :::
 
-> **定理 4** (核和像的性质)
+> **定理 4** （核和像的性质）
 > 
 > $\ker f \le G, \text{Im} f \le G'$
 
@@ -280,7 +288,7 @@ $G/H \triangleq \{ aH \mid a \in G \}$
 > 
 > 设 $\circ$ 是集合 $S$ 上的二元运算，$\sim$ 是 $S$ 上的等价关系。商集 $S/\sim$ 上的运算 $[a] \circ [b] = [a \circ b]$ 是良定义的 $\iff$ $\sim$ 是 $S$ 关于运算 $\circ$ 的同余关系。
 
-**证明：**说明 $\forall a' \in [a], b' \in [b], [a' \circ b'] = [a \circ b]$ 即可。trivial.
+**证明**：说明 $\forall a' \in [a], b' \in [b], [a' \circ b'] = [a \circ b]$ 即可。trivial.
 
 > **定理 9** 
 > 
